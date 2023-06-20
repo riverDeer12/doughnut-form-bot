@@ -1,84 +1,91 @@
 import random
-
 from selenium import webdriver
+import time
 from selenium.webdriver.common.by import By
+import form_x_paths as x_paths
+import helper_functions as helpers
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option('detach', True)
 driver = webdriver.Chrome(chrome_options)
-driver.maximize_window()
-driver.get('https://docs.google.com/forms/d/e/1FAIpQLSchR--zcSUXsAtjNGg6vfvW7X896LYvLhzt_4A9M7GtYY0Y-Q/viewform')
 
-# age spans
-age1825 = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/span/div/div[1]/label/div/div[1]/div/div[3]/div'
-age2535 = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/span/div/div[2]/label/div/div[1]/div/div[3]/div'
-age3545 = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/span/div/div[3]/label/div/div[1]/div/div[3]/div'
-age4555 = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/span/div/div[4]/label/div/div[1]/div/div[3]/div'
-age55 = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/span/div/div[5]/label/div/div[1]/div/div[3]/div'
+for _ in range(3):
 
-# genders
-male = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/span/div/div[1]/label/div/div[1]/div/div[3]/div'
-female = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/span/div/div[2]/label/div/div[1]/div/div[3]/div'
-other_gender = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/span/div/div[3]/label/div/div[1]/div/div[3]/div'
-identify = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/span/div/div[4]/label/div/div[1]/div/div[3]/div'
+    form_url = 'https://docs.google.com/forms/d/e/1FAIpQLSchR--zcSUXsAtjNGg6vfvW7X896LYvLhzt_4A9M7GtYY0Y-Q/viewform'
 
-# age spans
-entryLevel = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div/span/div/div[1]/label/div/div[1]/div/div[3]/div'
-intermediaryLevel = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div/span/div/div[2]/label/div/div[1]/div/div[3]/div'
-seniorLevel = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div/span/div/div[3]/label/div/div[1]/div/div[3]/div'
-executiveLevel = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div/span/div/div[4]/label/div/div[1]/div/div[3]/div'
+    # init driver and call url
+    driver.maximize_window()
+    driver.get(form_url)
 
-# company size
-smallEnterprise = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div/span/div/div[1]/label/div/div[1]/div/div[3]/div'
-mediumEnterprise = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div/span/div/div[2]/label/div/div[1]/div/div[3]/div'
-largeEnterprise = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div/span/div/div[3]/label/div/div[1]/div/div[3]/div'
-multinationalEnterprise = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div/span/div/div[4]/label/div/div[1]/div/div[3]/div'
+    # general data
+    driver.find_element(By.XPATH, random.choice(x_paths.age_span)).click()
+    driver.find_element(By.XPATH, random.choice(x_paths.genders)).click()
+    driver.find_element(By.XPATH, random.choice(x_paths.working_statuses)).click()
+    driver.find_element(By.XPATH, random.choice(x_paths.company_levels)).click()
+    driver.find_element(By.XPATH, x_paths.country_input).send_keys(helpers.select_country())
+    driver.find_element(By.XPATH, x_paths.ethnicity_input).send_keys(helpers.select_ethnicity())
 
-# industry type
-it = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[1]/label/div/div[1]/div/div[3]/div'
-marketing = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[2]/label/div/div[1]/div/div[3]/div'
-sales = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[3]/label/div/div[1]/div/div[3]/div'
-manufacturing = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[4]/label/div/div[1]/div/div[3]/div'
-entertainment = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[6]/label/div/div[1]/div/div[3]/div'
-health = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[7]/label/div/div[1]/div/div[3]/div'
-education = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[8]/label/div/div[1]/div/div[3]/div'
-hospitality = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[9]/label/div/div[1]/div/div[3]/div'
-other_industry = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div/span/div/div[10]/label/div/div[1]/div/div[3]/div'
+    # industry types
+    selected_industry_type = random.choice(x_paths.industry_types)
+    driver.find_element(By.XPATH, selected_industry_type).click()
 
-# countries
-countries = ['Croatia', 'Morocco', 'Slovenia', 'Germany', 'Switzerland']
+    # adaptation
+    selected_adaptation = helpers.select_adaptation()
 
-# ethnicity
-ethnicity = ['African', 'Asian', 'Caucasian', 'Hispanic/Latinx', 'Middle Eastern', 'Indigenous/Native American',
-             'Pacific Islander', 'Multiracial/Mixed heritage']
+    driver.find_element(By.XPATH, selected_adaptation).click()
 
-# adaptations
-adaptation_yes = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[8]/div/div/div[2]/div/div/span/div/div[1]/label/div/div[1]/div/div[3]'
-adaptation_no = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[8]/div/div/div[2]/div/div/span/div/div[2]/label/div/div[1]/div/div[3]/div'
+    if selected_adaptation == x_paths.adaptation_no:
+        driver.find_element(By.XPATH, x_paths.adaptation_input).send_keys('-')
+    else:
+        driver.find_element(By.XPATH, x_paths.adaptation_input).send_keys(
+            helpers.get_adaptation_example(selected_industry_type))
 
+    # local culture and preferences
+    driver.find_element(By.XPATH, helpers.select_cultural_prefs_level()).click()
+    driver.find_element(By.XPATH, x_paths.local_culture_factors_input).send_keys(
+        helpers.generate_input_keywords(x_paths.local_culture_factors))
 
-# local_culture_prefs
-importance_1 = "/html/body/div/div[2]/form/div[2]/div/div[2]/div[10]/div/div/div[2]/div/span/div/label[1]/div[2]/div/div/div[3]/div"
-importance_2 = "/html/body/div/div[2]/form/div[2]/div/div[2]/div[10]/div/div/div[2]/div/span/div/label[2]/div[2]/div/div/div[3]/div"
-importance_3 = "/html/body/div/div[2]/form/div[2]/div/div[2]/div[10]/div/div/div[2]/div/span/div/label[3]/div[2]/div/div/div[3]/div"
-importance_4 = "/html/body/div/div[2]/form/div[2]/div/div[2]/div[10]/div/div/div[2]/div/span/div/label[4]/div[2]/div/div/div[3]/div"
-importance_5 = "/html/body/div/div[2]/form/div[2]/div/div[2]/div[10]/div/div/div[2]/div/span/div/label[5]/div[2]/div/div/div[3]/div"
+    # specific features
+    driver.find_element(By.XPATH, helpers.select_specific_product_features()).click()
+    driver.find_element(By.XPATH, x_paths.specific_product_features_input).send_keys(
+        helpers.generate_input_keywords(x_paths.specific_product_feature_keywords))
 
-# answer arrays
-age_span = [age1825, age2535, age3545, age4555, age55]
-genders = [male, female, other_gender, identify]
-working_statuses = [entryLevel, intermediaryLevel, seniorLevel, executiveLevel]
-company_level = [smallEnterprise, mediumEnterprise, largeEnterprise, multinationalEnterprise]
-industry_type = [it, marketing, sales, manufacturing, entertainment, health, education, hospitality, other_industry]
-adaptations = [adaptation_yes, adaptation_no]
-local_culture_prefs = [importance_1, importance_2, importance_3, importance_4, importance_5]
+    # influence
+    driver.find_element(By.XPATH, helpers.select_influence_level()).click()
 
-# click actions
-driver.find_element(By.XPATH, random.choice(age_span)).click()
-driver.find_element(By.XPATH, random.choice(genders)).click()
-driver.find_element(By.XPATH, random.choice(working_statuses)).click()
-driver.find_element(By.XPATH, random.choice(company_level)).click()
-driver.find_element(By.XPATH, random.choice(industry_type)).click()
-driver.find_element(By.XPATH, random.choice(adaptations)).click()
-driver.find_element(By.XPATH, random.choice(local_culture_prefs)).click()
+    # role of language
+    driver.find_element(By.XPATH, random.choice(x_paths.language_roles)).click()
 
+    # product alignment
+    driver.find_element(By.XPATH, random.choice(x_paths.product_alignments)).click()
+
+    # product cultural adaptation
+    selected_cultural_adaptation = helpers.select_product_adaptation()
+
+    driver.find_element(By.XPATH, selected_cultural_adaptation).click()
+
+    if selected_cultural_adaptation == x_paths.product_cultural_adaptation_yes:
+        driver.find_element(By.XPATH, x_paths.product_cultural_adaptation_input).send_keys(
+            helpers.generate_input_keywords(x_paths.specific_product_feature_keywords))
+    else:
+        driver.find_element(By.XPATH, x_paths.adaptation_input).send_keys('-')
+
+    # satisfaction
+    driver.find_element(By.XPATH, random.choice(x_paths.satisfactions)).click()
+
+    # product recommendation
+    driver.find_element(By.XPATH, random.choice(x_paths.product_recommendations)).click()
+
+    # foreign product pricing
+    driver.find_element(By.XPATH, random.choice(x_paths.foreign_product_pricing)).click()
+
+    # advertising perception
+    driver.find_element(By.XPATH, helpers.select_advertising_level()).click()
+
+    # product design perception
+    driver.find_element(By.XPATH, helpers.select_design_perception()).click()
+
+    # submit form
+    driver.find_element(By.XPATH, "/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span").click()
+
+    time.sleep(5)
