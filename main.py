@@ -13,7 +13,7 @@ for _ in range(3):
 
     form_url = 'https://docs.google.com/forms/d/e/1FAIpQLSchR--zcSUXsAtjNGg6vfvW7X896LYvLhzt_4A9M7GtYY0Y-Q/viewform'
 
-    # init driver and call url
+    # call url
     driver.maximize_window()
     driver.get(form_url)
 
