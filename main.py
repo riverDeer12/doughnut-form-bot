@@ -9,7 +9,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option('detach', True)
 driver = webdriver.Chrome(chrome_options)
 
-for _ in range(3):
+for _ in range(107):
 
     form_url = 'https://docs.google.com/forms/d/e/1FAIpQLSchR--zcSUXsAtjNGg6vfvW7X896LYvLhzt_4A9M7GtYY0Y-Q/viewform'
 
@@ -18,9 +18,9 @@ for _ in range(3):
     driver.get(form_url)
 
     # general data
-    driver.find_element(By.XPATH, random.choice(x_paths.age_span)).click()
+    driver.find_element(By.XPATH, helpers.select_age()).click()
     driver.find_element(By.XPATH, random.choice(x_paths.genders)).click()
-    driver.find_element(By.XPATH, random.choice(x_paths.working_statuses)).click()
+    driver.find_element(By.XPATH, helpers.select_working_status()).click()
     driver.find_element(By.XPATH, random.choice(x_paths.company_levels)).click()
     driver.find_element(By.XPATH, x_paths.country_input).send_keys(helpers.select_country())
     driver.find_element(By.XPATH, x_paths.ethnicity_input).send_keys(helpers.select_ethnicity())

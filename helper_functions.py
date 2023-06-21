@@ -9,6 +9,14 @@ def generate_input_keywords(data):
     return ', '.join(factors_sample)
 
 
+def select_age():
+    return random.choices(x_paths.age_span, weights=(10, 20, 40, 20, 10), k=1)[0]
+
+
+def select_working_status():
+    return random.choices(x_paths.working_statuses, weights=(20, 40, 30, 10), k=1)[0]
+
+
 def select_cultural_prefs_level():
     return random.choices(x_paths.local_culture_preferences, weights=(10, 5, 10, 60, 20), k=1)[0]
 
@@ -34,7 +42,7 @@ def select_design_perception():
 
 
 def select_ethnicity():
-    return random.choices(x_paths.ethnicity, weights=(10, 10, 50, 10, 10, 10, 10, 10), k=1)[0]
+    return random.choices(x_paths.ethnicity, weights=(10, 10, 40, 10, 5, 10, 5, 10), k=1)[0]
 
 
 def select_country():
@@ -42,7 +50,7 @@ def select_country():
 
 
 def select_adaptation():
-    return random.choices(x_paths.adaptations, weights=(5, 95), k=1)[0]
+    return random.choices(x_paths.adaptations, weights=(20, 80), k=1)[0]
 
 
 def get_adaptation_example(industry_type):

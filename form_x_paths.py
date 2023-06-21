@@ -44,7 +44,7 @@ countries = ['Croatia', 'Morocco', 'Slovenia', 'Germany', 'Switzerland']
 country_input = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div/div[1]/input'
 
 # ethnicity
-ethnicity = ['African', 'Asian', 'Caucasian', 'Hispanic/Latinx', 'Middle Eastern', 'Indigenous/Native American',
+ethnicity = ['African', 'Asian', 'Caucasian', 'Hispanic', 'Latin', 'Middle Eastern',
              'Pacific Islander', 'Multiracial/Mixed heritage']
 ethnicity_input = '/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div[1]/div[2]/textarea'
 
