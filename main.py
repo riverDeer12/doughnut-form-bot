@@ -78,6 +78,6 @@ for _ in range(90):
     time.sleep(2)
 
     # submit form
-    driver.find_element(By.XPATH, "/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span").click()
+    driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span').click()
 
     time.sleep(10)

@@ -14,17 +14,17 @@ driver.get(instagram_profile_url)
 
 try:
     # Navigate to the Instagram page
-    url = "https://www.instagram.com/natgeo"
+    url = 'https://www.instagram.com/natgeo'
     driver.get(url)
 
     # Allow time for the page to load
     time.sleep(5)
 
     # Find all img elements with the specified class
-    img_elements = driver.find_elements(By.CLASS_NAME, "x5yr21d.xu96u03.x10l6tqk.x13vifvy.x87ps6o.xh8yej3")
+    img_elements = driver.find_elements(By.CLASS_NAME, 'x5yr21d.xu96u03.x10l6tqk.x13vifvy.x87ps6o.xh8yej3')
 
     # Extract the 'src' attributes from the img elements
-    img_sources = [img.get_attribute("src") for img in img_elements]
+    img_sources = [img.get_attribute('src') for img in img_elements]
 
     # Print the extracted image URLs
     for src in img_sources:
